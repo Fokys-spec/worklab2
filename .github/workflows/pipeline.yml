@@ -1,0 +1,32 @@
+name: Test and Deploy Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test-and-deploy:
+    name: Test and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      # Крок 1: Клонування репозиторію
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Крок 2: Встановлення залежностей
+      - name: Install dependencies
+        run: |
+          npm install
+
+      # Крок 3: Запуск тестів
+      - name: Run tests
+        run: |
+          npm run test
+        # Якщо цей крок завершується помилкою, наступні кроки не виконуються
+
+      # Крок 4: Симуляція деплою
+      - name: Simulate Deploy
+        run: echo "Deployed"
